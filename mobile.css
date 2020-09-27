@@ -1,0 +1,85 @@
+@media screen and (max-width: 1440px) {
+    body {
+        font-size: 25px;
+    }
+    .container .content {
+        padding: 9% 0 0;
+      }
+  }
+@media screen and (max-width: 1024px) {
+  .container .content {
+    padding: 11.5% 0 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  .container .content {
+    padding: 13% 0 0;
+  }
+  .container .header .header_top {
+    font-size: 0.7857rem;
+  }
+  .header_with_search .logo img {
+    width: 148px;
+    max-height: 42px;
+  }
+  .header_with_search .search_navbar {
+    flex: 9;
+  }
+  .header_with_search .search_navbar .search form input {
+    height: 30px;
+  }
+  .header_with_search .search_navbar .navbar a {
+    margin-right: 2%;
+    font-size: 0.7142rem;
+  }
+  .header_with_search .search_navbar .navbar {
+    padding: 1% 0;
+  }
+  .header_with_search .cart {
+    flex: 1;
+  }
+  .carousel__header a {
+    margin-left: 1%;
+    font-size: 12px;
+  }
+
+  .carousel__header .carousel #font_shopee_mall {
+    font-size: 0.8125rem;
+  }
+  .list_products .list_products_header a {
+    width: 25%;
+  }
+  .carousel__header .carousel_all a i {
+      font-size: 0.8125rem;
+  }
+  .product {
+    width: 23.5%;
+  }
+  .customer_care .customer_care_items {
+    width: 31.33334%;
+    margin: 0 1% 5%;
+  }
+  .nation {
+    flex-direction: column;
+    text-align: center;
+  }
+  .nation .nation_items {
+    margin-top: 2%;
+  }
+  .policy_address .policy {
+    flex-wrap: wrap;
+  }
+  .policy_address .policy a {
+    width: 33.33334%;
+    text-align: center;
+    margin-bottom: 2%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+
+}
