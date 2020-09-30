@@ -104,6 +104,8 @@ var category = (function () {
     },
   ];
 
+  let index = 0;
+
   function getCategories() {
     let category = "";
     for (let i = 0; i < categories.length; i++) {
@@ -145,34 +147,82 @@ var category = (function () {
     for (let j = 10; j < node.length; j++) {
       node[j].style.display = "none";
     }
+    if (screen.width <= 768) {
+      for (let j = 0; j < node.length; j++) {
+        if (j >= 6) {
+          node[j].style.display = "none";
+        }
+      }
+    } else {
+      for (let k = 0; k < node.length; k++) {
+        if (k >= 10) {
+          node[k].style.display = "none";
+        }
+      }
+    }
   }
 
   function nextList() {
     let node = document.getElementsByClassName("category_list_group")[0]
       .children;
 
-    for (let i = 0; i < 3; i++) {
-      node[i].style.display = "none";
-      node[i + 10].style.display = "block";
-      node[i + 10].style.display = "flex";
-      node[i + 10].style.flexDirection = "column";
+    for (var i = index; i < index + 3; i++) {
+      if (screen.width <= 768) {
+        if (i + 6 >= node.length) {
+          break;
+        }
+        node[i].style.display = "none";
+        node[i + 6].style.display = "block";
+        node[i + 6].style.display = "flex";
+        node[i + 6].style.flexDirection = "column";
+      } else {
+        if (i + 10 >= node.length) {
+          break;
+        }
+        node[i].style.display = "none";
+        node[i + 10].style.display = "block";
+        node[i + 10].style.display = "flex";
+        node[i + 10].style.flexDirection = "column";
+      }
     }
-    document.getElementsByClassName("btn-prev")[0].style.display = "block";
-    document.getElementsByClassName("btn-next")[0].style.display = "none";
+    index = i;
+    console.log(index);
+    if (screen.width <= 768) {
+      if (index + 6 >= node.length) {
+        document.getElementById("btn-category-next").style.display = "none";
+      }
+    } else {
+      if (index + 10 >= node.length) {
+        document.getElementById("btn-category-next").style.display = "none";
+      }
+    }
+    document.getElementById("btn-category-prev").style.display = "block";
   }
 
   function prevList() {
     let node = document.getElementsByClassName("category_list_group")[0]
       .children;
-
-    for (let i = 0; i < 3; i++) {
-      node[i].style.display = "block";
-      node[i].style.display = "flex";
-      node[i].style.flexDirection = "column";
-      node[i + 10].style.display = "none";
+    for (var i = index; i > index - 3; i--) {
+      if (i - 1 < 0) {
+        break;
+      }
+      if (screen.width <= 768) {
+        node[i - 1].style.display = "block";
+        node[i - 1].style.display = "flex";
+        node[i - 1].style.flexDirection = "column";
+        node[i + 5].style.display = "none";
+      } else {
+        node[i - 1].style.display = "block";
+        node[i - 1].style.display = "flex";
+        node[i - 1].style.flexDirection = "column";
+        node[i + 9].style.display = "none";
+      }
     }
-    document.getElementsByClassName("btn-prev")[0].style.display = "none";
-    document.getElementsByClassName("btn-next")[0].style.display = "block";
+    index = i;
+    if (index <= 0) {
+      document.getElementById("btn-category-prev").style.display = "none";
+    }
+    document.getElementById("btn-category-next").style.display = "block";
   }
 
   return {
@@ -227,7 +277,7 @@ var promotionCategory = (function () {
       image: "images/mt.png",
     },
   ];
-
+  let index = 0;
   function getPromotionCategories() {
     let listcategory = "";
     for (let i = 0; i < promotionCategories.length; i++) {
@@ -241,9 +291,62 @@ var promotionCategory = (function () {
     document.getElementsByClassName(
       "promotion-categories"
     )[0].innerHTML = listcategory;
+    if (screen.width <= 768) {
+      let node = document.getElementsByClassName("promotion-categories")[0]
+        .children;
+      for (let j = 0; j < node.length; j++) {
+        if (j >= 6) {
+          node[j].style.display = "none";
+        }
+      }
+    }
+  }
+
+  function nextList() {
+    let node = document.getElementsByClassName("promotion-categories")[0]
+      .children;
+    for (var i = index; i < index + 4; i++) {
+      if (i + 6 >= node.length) {
+        break;
+      }
+      node[i].style.display = "none";
+      node[i + 6].style.display = "block";
+      node[i + 6].style.display = "flex";
+      node[i + 6].style.flexDirection = "column";
+    }
+    index = i;
+    if (index + 6 >= node.length) {
+      document.getElementById("btn-promotion-category-next").style.display =
+        "none";
+    }
+    document.getElementById("btn-promotion-category-prev").style.display =
+      "block";
+  }
+
+  function prevList() {
+    let node = document.getElementsByClassName("promotion-categories")[0]
+      .children;
+    for (var i = index; i > index - 4; i--) {
+      if (i - 1 < 0) {
+        break;
+      }
+      node[i + 5].style.display = "none";
+      node[i - 1].style.display = "block";
+      node[i - 1].style.display = "flex";
+      node[i - 1].style.flexDirection = "column";
+    }
+    index = i;
+    if (index <= 0) {
+      document.getElementById("btn-promotion-category-prev").style.display =
+        "none";
+    }
+    document.getElementById("btn-promotion-category-next").style.display =
+      "block";
   }
   return {
     getPromotionCategories: getPromotionCategories,
+    nextListCategory: nextList,
+    prevListCategory: prevList,
   };
 })();
 
@@ -350,6 +453,7 @@ slideBannerMall.showSlideBannerMall();
 setInterval(function () {
   slideBanner.showSlideBanner();
   slideBannerMall.showSlideBannerMall();
+
 }, 4000);
 
 var productSale = (function () {
@@ -420,26 +524,49 @@ var productSale = (function () {
       "flash_sale_items"
     )[0].innerHTML = listProduct;
     let node = document.getElementsByClassName("flash_sale_items")[0].children;
-    for (let k = 0; k < node.length; k++) {
-      if (k >= 6) {
-        node[k].style.display = "none";
+    if (screen.width <= 768) {
+      for (let k = 0; k < node.length; k++) {
+        if (k >= 5) {
+          node[k].style.display = "none";
+        }
+      }
+    } else {
+      for (let k = 0; k < node.length; k++) {
+        if (k >= 6) {
+          node[k].style.display = "none";
+        }
       }
     }
   }
   function nextList() {
     let node = document.getElementsByClassName("flash_sale_items")[0].children;
     for (var i = index; i < index + 4; i++) {
-      if (i + 6 >= node.length) {
-        break;
+      if (screen.width <= 768) {
+        if (i + 5 >= node.length) {
+          break;
+        }
+        node[i].style.display = "none";
+        node[i + 5].style.display = "block";
+      } else {
+        if (i + 6 >= node.length) {
+          break;
+        }
+        node[i].style.display = "none";
+        node[i + 6].style.display = "block";
       }
-      node[i].style.display = "none";
-      node[i + 6].style.display = "block";
     }
     index = i;
-    if (index + 6 >= node.length) {
-      document.getElementsByClassName("btn-next")[1].style.display = "none";
+    if (screen.width <= 768){
+      if (index + 5 >= node.length) {
+        document.getElementById('btn-sale-next').style.display = "none";
+      }
+    }else{
+      if (index + 6 >= node.length) {
+        document.getElementById('btn-sale-next').style.display = "none";
+      }
     }
-    document.getElementsByClassName("btn-prev")[1].style.display = "block";
+    
+    document.getElementById('btn-sale-prev').style.display = "block";
   }
 
   function prevList() {
@@ -447,16 +574,20 @@ var productSale = (function () {
     for (var i = index; i > index - 4; i--) {
       if (i - 1 < 0) {
         break;
-      } else {
+      }
+      if(screen.width <= 768){
+        node[i + 4].style.display = "none";
+        node[i - 1].style.display = "block";
+      }else{
         node[i + 5].style.display = "none";
         node[i - 1].style.display = "block";
       }
     }
     index = i;
     if (index <= 0) {
-      document.getElementsByClassName("btn-prev")[1].style.display = "none";
+      document.getElementById('btn-sale-prev').style.display = "none";
     }
-    document.getElementsByClassName("btn-next")[1].style.display = "block";
+    document.getElementById('btn-sale-next').style.display = "block";
   }
   return {
     showListProductSale: showListProductSale,
@@ -502,7 +633,7 @@ var productMallSale = (function () {
       image: "./images/wipro.jpeg",
     },
   ];
-
+  const widthDisplay = 768;
   let index = 0;
 
   function showProduct() {
@@ -548,27 +679,53 @@ var productMallSale = (function () {
     )[0].innerHTML = listProduct;
     let node = document.getElementsByClassName("products_mall_list")[0]
       .children;
-    for (let k = 0; k < node.length; k++) {
-      if (k >= 4) {
-        node[k].style.display = "none";
+    if (screen.width <= widthDisplay){
+      for (let k = 0; k < node.length; k++) {
+        if (k >= 3) {
+          node[k].style.display = "none";
+        }
       }
-    }
+    }else {
+      for (let k = 0; k < node.length; k++) {
+        if (k >= 4) {
+          node[k].style.display = "none";
+        }
+      }
+    }    
   }
 
   function nextProduct() {
     let node = document.getElementsByClassName("products_mall_list")[0]
       .children;
     for (var i = index; i < index + 3; i++) {
-      if (i + 4 >= node.length) {
-        break;
-      }
-      node[i].style.display = "none";
-      node[i + 4].style.display = "block";
+      if (screen.width <= widthDisplay) {
+        if (i + 3 >= node.length) {
+          break;
+        }
+        node[i].style.display = "none";
+        node[i + 3].style.display = "block";
+        node[i + 3].style.display = "flex";
+        node[i + 3].style.flexDirection = "column";
+      }else{
+        if (i + 4 >= node.length) {
+          break;
+        }
+        node[i].style.display = "none";
+        node[i + 4].style.display = "block";
+        node[i + 4].style.display = "flex";
+        node[i + 4].style.flexDirection = "column";
+      }      
     }
     index = i;
-    if (index + 4 >= node.length) {
-      document.getElementById("btn-mall-next").style.display = "none";
-    }
+    if(screen.width <= widthDisplay){
+      if (index + 3 >= node.length) {
+        document.getElementById("btn-mall-next").style.display = "none";
+      }
+    }else{
+      if (index + 4 >= node.length) {
+        document.getElementById("btn-mall-next").style.display = "none";
+      }
+    }    
     document.getElementById("btn-mall-prev").style.display = "block";
   }
 
@@ -579,8 +736,17 @@ var productMallSale = (function () {
       if (i - 1 < 0) {
         break;
       }
-      node[i + 3].style.display = "none";
+      if (screen.width <= widthDisplay){
+        node[i + 2].style.display = "none";
       node[i - 1].style.display = "block";
+      node[i - 1].style.display = "flex";
+      node[i - 1].style.flexDirection = "column";
+      }else{
+        node[i + 3].style.display = "none";
+        node[i - 1].style.display = "block";
+        node[i - 1].style.display = "flex";
+        node[i - 1].style.flexDirection = "column";
+      }      
     }
     index = i;
     if (index <= 0) {
@@ -718,92 +884,95 @@ var topSearch = (function () {
 
 topSearch.showProductTopSearch();
 
-var product = (function(){
+var product = (function () {
   let products = [
     {
-      'name' : 'khay ăn cho bé',
-      'image' : './images/product3.jpeg',
-      'description' : 'Khay ăn dặm lúa mạch kiểu nhật hình gà vàng ngộ nghĩnh đáng yêu an toàn cao cấp AD11',
-      'price' : '20.000',
-      'quantitySold' : '350'
+      name: "khay ăn cho bé",
+      image: "./images/product3.jpeg",
+      description:
+        "Khay ăn dặm lúa mạch kiểu nhật hình gà vàng ngộ nghĩnh đáng yêu an toàn cao cấp AD11",
+      price: "20.000",
+      quantitySold: "350",
     },
     {
-      'name' : 'nuớc hoa khô',
-      'image' : './images/product2.jpg',
-      'description' : 'nước hoa khô rắn hương thơm lâu khử mùi cho nam và nữ',
-      'price' : '30.000',
-      'quantitySold' : '150'
+      name: "nuớc hoa khô",
+      image: "./images/product2.jpg",
+      description: "nước hoa khô rắn hương thơm lâu khử mùi cho nam và nữ",
+      price: "30.000",
+      quantitySold: "150",
     },
     {
-      'name' : 'kẹo ampelipe',
-      'image' : './images/total-product2.jpeg',
-      'description' : '[HÀNG HOT] Kẹo Thỏi Alpenliebe Hương Xoài Nhân Muối Ớt Siêu Ngon',
-      'price' : '5.000',
-      'quantitySold' : '350'
+      name: "kẹo ampelipe",
+      image: "./images/total-product2.jpeg",
+      description:
+        "[HÀNG HOT] Kẹo Thỏi Alpenliebe Hương Xoài Nhân Muối Ớt Siêu Ngon",
+      price: "5.000",
+      quantitySold: "350",
     },
     {
-      'name' : 'Khăn Tắm',
-      'image' : './images/total-product1.jpeg',
-      'description' : 'Khăn Tắm Lông Cừu Cao Cấp 35x75cm Siêu Thấm Hút',
-      'price' : '24.000',
-      'quantitySold' : '50'
+      name: "Khăn Tắm",
+      image: "./images/total-product1.jpeg",
+      description: "Khăn Tắm Lông Cừu Cao Cấp 35x75cm Siêu Thấm Hút",
+      price: "24.000",
+      quantitySold: "50",
     },
     {
-      'name' : 'móc treo',
-      'image' : './images/total-product3.jpeg',
-      'description' : 'Móc treo bằng nhựa hình động vật',
-      'price' : '20.000',
-      'quantitySold' : '350'
+      name: "móc treo",
+      image: "./images/total-product3.jpeg",
+      description: "Móc treo bằng nhựa hình động vật",
+      price: "20.000",
+      quantitySold: "350",
     },
     {
-      'name' : 'đồng hồ thông minh',
-      'image' : './images/total-product4.jpeg',
-      'description' : 'đồng hồ thông minh có kháng nước, kháng bụi',
-      'price' : '2.000.000',
-      'quantitySold' : '50'
+      name: "đồng hồ thông minh",
+      image: "./images/total-product4.jpeg",
+      description: "đồng hồ thông minh có kháng nước, kháng bụi",
+      price: "2.000.000",
+      quantitySold: "50",
     },
     {
-      'name' : 'ốp điện thoại',
-      'image' : './images/total-product5.jpeg',
-      'description' : 'ốp điện thoại màu xanh cho iphone 12',
-      'price' : '60.000',
-      'quantitySold' : '350'
+      name: "ốp điện thoại",
+      image: "./images/total-product5.jpeg",
+      description: "ốp điện thoại màu xanh cho iphone 12",
+      price: "60.000",
+      quantitySold: "350",
     },
     {
-      'name' : 'keo lột mụn',
-      'image' : './images/total-product6.jpeg',
-      'description' : 'keo lột mụn cực hiệu quả',
-      'price' : '40.000',
-      'quantitySold' : '350'
+      name: "keo lột mụn",
+      image: "./images/total-product6.jpeg",
+      description: "keo lột mụn cực hiệu quả",
+      price: "40.000",
+      quantitySold: "350",
     },
     {
-      'name' : 'túi',
-      'image' : './images/total-product7.jpeg',
-      'description' : 'túi đeo siêu đẹp',
-      'price' : '150.000',
-      'quantitySold' : '100'
+      name: "túi",
+      image: "./images/total-product7.jpeg",
+      description: "túi đeo siêu đẹp",
+      price: "150.000",
+      quantitySold: "100",
     },
     {
-      'name' : 'dép nam',
-      'image' : './images/total-product8.jpeg',
-      'description' : 'dép nam đúc hãng adidas ',
-      'price' : '69.000',
-      'quantitySold' : '500'
+      name: "dép nam",
+      image: "./images/total-product8.jpeg",
+      description: "dép nam đúc hãng adidas ",
+      price: "69.000",
+      quantitySold: "500",
     },
     {
-      'name' : 'khay ăn cho bé',
-      'image' : './images/total-product9.jpeg',
-      'description' : 'Khay ăn dặm lúa mạch kiểu nhật hình gà vàng ngộ nghĩnh đáng yêu an toàn cao cấp AD11',
-      'price' : '20.000',
-      'quantitySold' : '450'
+      name: "khay ăn cho bé",
+      image: "./images/total-product9.jpeg",
+      description:
+        "Khay ăn dặm lúa mạch kiểu nhật hình gà vàng ngộ nghĩnh đáng yêu an toàn cao cấp AD11",
+      price: "20.000",
+      quantitySold: "450",
     },
     {
-      'name' : 'móc treo',
-      'image' : './images/total-product10.jpeg',
-      'description' : 'móc treo trong suốt cực kỳ chắc chắn',
-      'price' : '20.000',
-      'quantitySold' : '350'
-    }
+      name: "móc treo",
+      image: "./images/total-product10.jpeg",
+      description: "móc treo trong suốt cực kỳ chắc chắn",
+      price: "20.000",
+      quantitySold: "350",
+    },
   ];
 
   function getProductstoday(times) {
@@ -811,8 +980,7 @@ var product = (function(){
 
     for (let i = 0; i < times; i++) {
       for (let j = 0; j < products.length; j++) {
-        listProductToday += 
-        `
+        listProductToday += `
         <div class="product">
         <div class="product_img">
           <img src="${products[j].image}" alt="${products[j].name}" />
@@ -844,9 +1012,8 @@ var product = (function(){
     let listProductMallSale = "";
 
     for (let i = 0; i < times; i++) {
-      for (let j = products.length -1; j >= 0; j--) {
-        listProductMallSale += 
-        `
+      for (let j = products.length - 1; j >= 0; j--) {
+        listProductMallSale += `
         <div class="product">
         <div class="product_img">
           <img src="${products[j].image}" alt="${products[j].name}" />
@@ -872,23 +1039,51 @@ var product = (function(){
     document.getElementById("product_male_sale").style.borderBottom =
       "4px solid var(--main-color)";
     document.getElementById("suggestion_today").style.borderBottom = "none";
-  }  
+  }
 
   function seeMoreProducts() {
     let node = document.getElementById("product_male_sale").style.borderBottom;
-    if (node == 'none'){
+    if (node == "none") {
       return getProductstoday(4);
     }
-  return getProductsMallSale(4);
+    return getProductsMallSale(4);
+  }
+
+  return {
+    getProductsToday: getProductstoday,
+    getProductsMallSale: getProductsMallSale,
+    seeMoreProducts: seeMoreProducts,
+  };
+})();
+
+product.getProductsToday(2);
+
+var scrollPage = (function(){
+  function checkScroll(){
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      
+      document.getElementById("btn-back-to-top").style.display = "block";
+  } else {
+       
+      document.getElementById("btn-back-to-top").style.display = "none";
+  }
+  }
+  function scroll(){
+    setTimeout(function(){
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }, 500);
+      
     
   }
 
   return {
-    getProductsToday : getProductstoday,
-    getProductsMallSale : getProductsMallSale,
-    seeMoreProducts : seeMoreProducts
+    checkScroll:checkScroll,
+    scroll : scroll
   }
-
 })();
 
-product.getProductsToday(2);
+window.onscroll = function() {
+  console.log('a');
+  scrollPage.checkScroll();
+};

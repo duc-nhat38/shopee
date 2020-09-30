@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="./images/logo-favicon.jpg">
   <title>Shopee</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="mobile.css" />
@@ -11,6 +12,9 @@
 </head>
 
 <body>
+  <button id="btn-back-to-top" onclick="scrollPage.scroll()">
+    <i class="fas fa-angle-up"></i>
+  </button>
   <div class="container">
     <div class="header">
       <div class="header_top">
@@ -99,9 +103,18 @@
             </a>
           </div>
         </div>
-        <div class="promotion-categories">
+        <div class="list-promotion-categories">
+          <button class="btn btn-prev " id="btn-promotion-category-prev" onclick="promotionCategory.prevListCategory()">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="promotion-categories">
 
+          </div>
+          <button class="btn btn-next" id="btn-promotion-category-next" onclick="promotionCategory.nextListCategory()">
+            <i class="fas fa-chevron-right"></i>
+          </button>
         </div>
+        
       </div>
       <div class="content_padding">
         <div class="package_banner">
@@ -111,11 +124,11 @@
           <div class="category_header">
             <p>danh mục</p>
           </div>
-          <button class="btn btn-prev btn-category" onclick="category.prevListCategory()">
+          <button class="btn btn-prev " id="btn-category-prev" onclick="category.prevListCategory()">
             <i class="fas fa-chevron-left"></i>
           </button>
           <div class="category_list_group"></div>
-          <button class="btn btn-next btn-category" onclick="category.nextListCategory()">
+          <button class="btn btn-next btn-category" id="btn-category-next"  onclick="category.nextListCategory()">
             <i class="fas fa-chevron-right"></i>
           </button>
         </div>
@@ -123,13 +136,13 @@
           <div class="flash_sale_header">
             <img src="images/flashsale.png" alt="">
           </div>
-          <button class="btn btn-prev " onclick="productSale.prevListProductSale()">
+          <button class="btn btn-prev " id="btn-sale-prev" onclick="productSale.prevListProductSale()">
             <i class="fas fa-chevron-left"></i>
           </button>
           <div class="flash_sale_items">
 
           </div>
-          <button class="btn btn-next btn-sale" onclick="productSale.nextListProductSale()">
+          <button class="btn btn-next" id="btn-sale-next" onclick="productSale.nextListProductSale()">
             <i class="fas fa-chevron-right"></i>
           </button>
         </div>

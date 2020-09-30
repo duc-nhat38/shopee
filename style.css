@@ -141,6 +141,9 @@ body {
   color: var(--color-font);
   text-transform: capitalize;
 }
+.header_with_search .search_navbar .navbar a:hover {
+  opacity: 0.7;
+}
 .header_with_search .cart {
   flex: 2;
   font-size: 1.5625rem;
@@ -174,7 +177,7 @@ body {
 .banner_promotion-categories .banner .banner_slide img {
   width: 100%;
   height: 100%;
-  border-radius: 3px;
+  border-radius: 3px;  
 }
 .list_dot {
   width: 100%;
@@ -220,13 +223,29 @@ body {
 .banner .banner_static #banner_static_bottom {
   margin-top: 3px;
 }
-.banner_promotion-categories .promotion-categories {
+.list-promotion-categories {
+  width: 100%;
+  position: relative;
+}
+.list-promotion-categories .btn {
+  top: 42%;
+  display: none;
+}
+.list-promotion-categories:hover .btn-prev , .list-promotion-categories .btn-prev:hover {
+  top: 41%;
+  left: -2%;
+}
+.list-promotion-categories:hover .btn-next , .list-promotion-categories .btn-next:hover {
+  top: 41%;
+  right: -2%;
+}
+.banner_promotion-categories .list-promotion-categories .promotion-categories {
   width: 100%;
   padding: 1% 0;
   display: flex;
   justify-content: space-between;
 }
-.banner_promotion-categories .promotion-categories a {
+.banner_promotion-categories .list-promotion-categories .promotion-categories a {
   width: 10%;
   display: flex;
   flex-direction: column;
@@ -236,7 +255,14 @@ body {
   font-size: 0.8125rem;
   text-transform: capitalize;
 }
-.banner_promotion-categories .promotion-categories a img {
+.banner_promotion-categories .list-promotion-categories .promotion-categories a:hover {
+  border: 1px solid var(--border-color-hover);
+  border-radius: 3px;
+}
+.banner_promotion-categories .list-promotion-categories .promotion-categories a:hover span {
+  color: var(--main-color);
+}
+.banner_promotion-categories .list-promotion-categories .promotion-categories a img {
   width: 45%;
   margin: 0 auto 10%;
 }
@@ -373,11 +399,16 @@ body {
 }
 .flash_sale .flash_sale_items a {
   width: 16.66667%;
+  padding: 1% 0;
   text-align: center;
   color: var(--color-font-black);
   font-size: 0.8125rem;
   text-transform: capitalize;
   
+}
+.flash_sale .flash_sale_items a:hover {
+  border: 1px solid var(--border-color-hover);
+  border-radius: 3px;
 }
 .flash_sale .flash_sale_items a img {
   width: 100%;
@@ -482,22 +513,28 @@ body {
 }
 .products_mall .products_mall_list div {
   width: 23%;
-  /* display: flex;
-  flex-direction: column; */
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   margin: 0 1%;
   text-align: center;
 }
 .products_mall .products_mall_list a {
   width: 100%;
+  height: 100%;
+  padding: 5% 0;
   text-transform: capitalize;
   font-weight: bold;
   color: var(--main-color-2);
   font-size: 0.9375rem;
 }
+.products_mall .products_mall_list a:hover {
+  border: 1px solid var(--border-color-hover);
+  border-radius: 3px;
+}
 .products_mall .products_mall_list a img {
   width: 100%;
-  padding: 20%;
+  padding: 17% 20%;
 }
 
  .product_mall_container:hover .btn-next,
@@ -560,6 +597,10 @@ body {
   text-transform: capitalize;
   font-weight: bold;
   font-size: 0.875rem;
+}
+.category_section .category_section_items a:hover {
+  border: 1px solid var(--border-color-hover);
+  border-radius: 3px;
 }
 .category_section .category_section_items a .items_text_opacity {
   opacity: 0.5;
@@ -649,7 +690,10 @@ body {
 .top_search .top_search_items a img {
   width: 100%;
 }
-
+.top_search .top_search_items a:hover {
+  border: 1px solid var(--border-color-hover);
+  border-radius: 3px;
+}
 .top_search .top_search_items a .top_search_item_img .top_search_item_text {
   width: 100%;
   padding: 10px 0;
@@ -908,4 +952,25 @@ body {
 }
 .footer .address p {
   margin-bottom: 1%;
+}
+#btn-back-to-top {
+  right: 3%;
+  bottom: 10%;
+  position: fixed;
+  border: none;
+  border-radius: 50%;
+  padding: 0.8% 1.3%;
+  z-index: 10;
+  background-color: var(--main-color);
+  color: var(--color-font);
+  font-size: 1.5rem;
+}
+#btn-back-to-top:hover {
+  transition: 0.5s;
+  background-color: var(--main-color-2);
+  padding: 1.1% 1.6%;
+  font-size: 1.7rem;
+  right: 2.5%;
+  bottom: 9.5%;
+  display: none;
 }
