@@ -17,8 +17,37 @@
   </button>
   <div class="container">
     <div class="header">
-      <div class="header_top">
-        <div class="menu_dropdown"></div>
+      <div class="header_mobile">
+        <div class="menu_dropdown">
+          <i class="fas fa-bars" onclick="events.showListMenu()"></i>
+          <ul class="list_menu menu_hide">
+            <li class="pt">
+              <a href="#">kênh nguời bán</a>
+            </li>
+            <li>
+              <a href="#">Thông Báo <i class="far fa-bell"></i> </a>
+            </li>
+            <li class="pt">
+              <a href="#">tải ứng dụng</a>
+            </li>            
+            <li class="pt">
+              <a href="#">Đăng ký</a>
+            </li>
+            <li class="pt">
+              <a href="#">Đăng nhập</a>
+            </li>
+            <li><a href="">Facebook <i class="fab fa-facebook"></i></a></li>
+            <li><a href="">instagram <i class="fab fa-instagram-square"></i></a></li>
+            <li>
+              <a href="#">Trợ giúp <i class="far fa-question-circle"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="cart">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+      </div>
+      <div class="header_top">        
         <ul class="connect">
           <li class="pt">
             <a href="#">kênh nguời bán</a>
@@ -181,43 +210,17 @@
             <span>xu hướng tìm kiếm</span>
             <a href="#"><i class="fas fa-sync-alt"></i> Xem thêm</a>
           </div>
-          <div class="category_section_items">
-            <a href="#" class="items_boder_right">
-              <div class="category_section_items_text">
-                <span>sandal nữ</span>
-                <span class="items_text_opacity">307k+ sản phẩm</span>
-              </div>
-              <img src="images/sandal-female.jpeg" alt="" />
-            </a>
-            <a href="#" class="items_boder_right">
-              <div class="category_section_items_text">
-                <span>balo nữ</span>
-                <span class="items_text_opacity">307k+ sản phẩm</span>
-              </div>
-              <img src="images/balo-female.jpeg" alt="" />
-            </a>
-            <a href="#" class="items_boder_right">
-              <div class="category_section_items_text">
-                <span>dép nam</span>
-                <span class="items_text_opacity">307k+ sản phẩm</span>
-              </div>
-              <img src="images/sandal-male.jpeg" alt="" />
-            </a>
-            <a href="#" class="items_boder_right">
-              <div class="category_section_items_text">
-                <span>balo nam</span>
-                <span class="items_text_opacity">307k+ sản phẩm</span>
-              </div>
-              <img src="images/balo-male.jpeg" alt="" />
-            </a>
-            <a href="#">
-              <div class="category_section_items_text">
-                <span>áo nữ</span>
-                <span class="items_text_opacity">307k+ sản phẩm</span>
-              </div>
-              <img src="images/clothes-female.jpeg" alt="" />
-            </a>
+          <div class="category_trend">
+            <button class="btn btn-prev" id="btn-category-trend-prev" onclick="trendSearch.prevCategory()">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="category_section_items">
+            </div>
+            <button class="btn btn-next " id="btn-category-trend-next" onclick="trendSearch.nextCategory()">
+              <i class="fas fa-chevron-right"></i>
+            </button>
           </div>
+          
         </div>
         <div class="top_search">
           <div class="top_search_header">

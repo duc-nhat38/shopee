@@ -106,10 +106,18 @@ var category = (function () {
   const widthDisplay = screen.width;
   var index = 0;
   var node;
-  if (widthDisplay <= 768) {
-    elements = 6;
+  if (widthDisplay <= 375) {
+    elements = 2;
   } else {
-    elements = 10;
+    if (widthDisplay <= 425) {
+      elements = 3;
+    } else {
+      if (widthDisplay <= 768) {
+        elements = 6;
+      } else {
+        elements = 10;
+      }
+    }
   }
 
   function getCategories() {
@@ -248,7 +256,7 @@ var promotionCategory = (function () {
     elements = 2;
   } else {
     if (widthDisplay <= 425) {
-      elements = 4;
+      elements = 3;
     } else {
       if (widthDisplay <= 768) {
         elements = 6;
@@ -280,9 +288,6 @@ var promotionCategory = (function () {
   }
 
   function nextList() {
-    // if(widthDisplay <= 768){
-    //   next(6);
-    // }
     for (var i = index; i < index + 4; i++) {
       if (i + elements >= node.length) {
         break;
@@ -470,11 +475,18 @@ var productSale = (function () {
   var index = 0;
   var node;
   var elements;
-
-  if (widthDisplay <= 768) {
-    elements = 4;
+  if (widthDisplay <= 375) {
+    elements = 1;
   } else {
-    elements = 6;
+    if (widthDisplay <= 425) {
+      elements = 2;
+    } else {
+      if (widthDisplay <= 768) {
+        elements = 4;
+      } else {
+        elements = 6;
+      }
+    }
   }
   function showListProductSale() {
     let listProduct = "";
@@ -581,11 +593,20 @@ var productMallSale = (function () {
   var index = 0;
   var node;
   var elements;
-  if (widthDisplay <= 768) {
-    elements = 3;
+  if (widthDisplay <= 375) {
+    elements = 1;
   } else {
-    elements = 4;
+    if (widthDisplay <= 425) {
+      elements = 2;
+    } else {
+      if (widthDisplay <= 768) {
+        elements = 3;
+      } else {
+        elements = 4;
+      }
+    }
   }
+  
   function showProduct() {
     let listProduct = "";
     for (let i = 0; i < 2; i++) {
@@ -710,6 +731,18 @@ var topSearch = (function () {
     },
   ];
   var index = 0;
+  var node;
+  const widthDisplay = screen.width;
+  var elements;
+  if (widthDisplay <= 375) {
+    elements = 1;
+  } else {
+    if (widthDisplay <= 425) {
+      elements = 2;
+    } else {
+        elements = 3;
+    }
+  }
   function showProduct() {
     let listProduct = "";
     for (let i = 0; i < topProducts.length; i += 3) {
@@ -746,39 +779,36 @@ var topSearch = (function () {
     document.getElementsByClassName(
       "top_search_items"
     )[0].innerHTML = listProduct;
-    let node = document.getElementsByClassName("top_search_items")[0].children;
+    node = document.getElementsByClassName("top_search_items")[0].children;
     for (let j = 0; j < node.length; j++) {
-      if (j >= 3) {
+      if (j >= elements) {
         node[j].style.display = "none";
       }
     }
   }
 
   function nextProduct() {
-    let node = document.getElementsByClassName("top_search_items")[0].children;
     for (var i = index; i < index + 3; i++) {
-      if (i + 3 >= node.length) {
+      if (i + elements >= node.length) {
         break;
       }
       node[i].style.display = "none";
-      node[i + 3].style.display = "block";
+      node[i + elements].style.display = "block";
     }
     index = i;
-    if (index + 3 >= node.length) {
+    if (index + elements >= node.length) {
       document.getElementById("btn-top-search-next").style.display = "none";
     }
     document.getElementById("btn-top-search-prev").style.display = "block";
   }
 
   function prevProduct() {
-    let node = document.getElementsByClassName("top_search_items")[0].children;
-
     for (var i = index; i > index - 3; i--) {
       if (i - 1 < 0) {
         break;
       }
       node[i - 1].style.display = "block";
-      node[i + 2].style.display = "none";
+      node[i + elements - 1].style.display = "none";
     }
     index = i;
     if (index <= 0) {
@@ -892,10 +922,11 @@ var product = (function () {
       for (let j = 0; j < products.length; j++) {
         listProductToday += `
         <div class="product">
+        <a href="">
         <div class="product_img">
           <img src="${products[j].image}" alt="${products[j].name}" />
           <img src="images/10-10-rvd.png" alt="" class="img_sale"/>
-        </div>
+        </div>        
         <div class="description_product">
           <div class="description">
           ${products[j].description}
@@ -905,6 +936,7 @@ var product = (function () {
             <div class="quantity_sold">Đã bán ${products[j].quantitySold}</div>
           </div>
         </div>
+        </a>
         <div class="similar_product">
           <a href="#">Tìm sản phẩm tương tự</a>
         </div>
@@ -925,6 +957,7 @@ var product = (function () {
       for (let j = products.length - 1; j >= 0; j--) {
         listProductMallSale += `
         <div class="product">
+        <a href="">
         <div class="product_img">
           <img src="${products[j].image}" alt="${products[j].name}" />
           <img src="images/10-10-rvd.png" alt="" class="img_sale"/>
@@ -938,6 +971,7 @@ var product = (function () {
             <div class="quantity_sold">Đã bán ${products[j].quantitySold}</div>
           </div>
         </div>
+        </a>
         <div class="similar_product">
           <a href="#">Tìm sản phẩm tương tự</a>
         </div>
@@ -990,6 +1024,125 @@ var scrollPage = (function () {
   };
 })();
 
+var trendSearch = (function(){
+  var categories = [
+    {
+      'name' : 'sandal nữ',
+      'image' : './images/sandal-female.jpeg',
+      'quantity' : '307'
+    },
+    {
+      'name' : 'balo nữ',
+      'image' : './images/balo-female.jpeg',
+      'quantity' : '257'
+    },
+    {
+      'name' : 'balo nam',
+      'image' : './images/balo-male.jpeg',
+      'quantity' : '310'
+    },
+    {
+      'name' : 'dép nam',
+      'image' : './images/sandal-male.jpeg',
+      'quantity' : '250'
+    },
+    {
+      'name' : 'áo nữ',
+      'image' : './images/clothes-female.jpeg',
+      'quantity' : '307'
+    }
+  ];
+  var node;
+  const widthDisplay = screen.width;
+  var elements;
+  var index = 0;
+  if (widthDisplay <= 425) {
+    elements = 2;
+  }else{
+    elements = 5;
+  }
+  function getCategory(){
+    let listCategory = '';
+    for (let i = 0; i < categories.length; i++) {
+      listCategory += 
+      `
+      <a href="#">
+              <div class="category_section_items_text">
+                <span>${categories[i].name}</span>
+                <span class="items_text_opacity">${categories[i].quantity}k+ sản phẩm</span>
+              </div>
+              <img src="${categories[i].image}" alt="" />
+            </a>
+      `; 
+      
+    }
+    document.getElementsByClassName('category_section_items')[0].innerHTML = listCategory;
+    node = document.getElementsByClassName('category_section_items')[0].children;
+    for (let j = 0; j < node.length; j++) {
+      if (j >= elements){
+        node[j].style.display = 'none';
+      }      
+    }
+  }
+
+  function nextCategory() {
+    for (var i = index; i < index + 2; i++) {
+      if (i + elements >= node.length) {
+        break;
+      }
+      node[i].style.display = "none";
+      node[i + elements].style.display = "block";
+      node[i + elements].style.display = "flex";
+    }
+    index = i;
+    if (index + elements >= node.length) {
+      document.getElementById("btn-category-trend-next").style.display = "none";
+    }
+    document.getElementById("btn-category-trend-prev").style.display = "block";
+  }
+
+  function prevCategory() {
+    for (var i = index; i > index - 2; i--) {
+      if (i - 1 < 0) {
+        break;
+      }
+      node[i - 1].style.display = "block";
+      node[i - 1].style.display = "flex";
+      node[i + elements - 1].style.display = "none";
+    }
+    index = i;
+    if (index <= 0) {
+      document.getElementById("btn-category-trend-prev").style.display = "none";
+    }
+    document.getElementById("btn-category-trend-next").style.display = "block";
+  }
+
+  return {
+    getCategory:getCategory,
+    nextCategory : nextCategory,
+    prevCategory  : prevCategory
+  }
+})();
+
+
+var events = (function(){
+  var index = 0;
+  function showMenu(){
+    if(index == 0){
+      document.getElementsByClassName('list_menu')[0].style.display = 'block';
+      document.getElementsByClassName('list_menu')[0].style.display = 'flex';
+      document.getElementsByClassName('list_menu')[0].style.flexDirection = 'column';
+    }else{
+      document.getElementsByClassName('list_menu')[0].style.display = 'none';
+    }   
+    (index == 0)?index = 1: index = 0;
+}
+
+return {
+  showListMenu : showMenu
+}
+})();
+
 window.onload = function () {
   slideBanner.showSlideBanner();
 
@@ -1003,6 +1156,8 @@ window.onload = function () {
 
   productMallSale.showProductMallSale();
 
+  trendSearch.getCategory();
+
   topSearch.showProductTopSearch();
 
   product.getProductsToday(2);
@@ -1015,4 +1170,6 @@ window.onload = function () {
   window.onscroll = function () {
     scrollPage.checkScroll();
   };
+
+
 };
