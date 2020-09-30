@@ -103,8 +103,14 @@ var category = (function () {
       name: "sản phẩm khác",
     },
   ];
-
-  let index = 0;
+  const widthDisplay = screen.width;
+  var index = 0;
+  var node;
+  if (widthDisplay <= 768) {
+    elements = 6;
+  } else {
+    elements = 10;
+  }
 
   function getCategories() {
     let category = "";
@@ -142,81 +148,40 @@ var category = (function () {
     document.getElementsByClassName(
       "category_list_group"
     )[0].innerHTML = category;
-    let node = document.getElementsByClassName("category_list_group")[0]
-      .children;
-    for (let j = 10; j < node.length; j++) {
-      node[j].style.display = "none";
-    }
-    if (screen.width <= 768) {
-      for (let j = 0; j < node.length; j++) {
-        if (j >= 6) {
-          node[j].style.display = "none";
-        }
-      }
-    } else {
-      for (let k = 0; k < node.length; k++) {
-        if (k >= 10) {
-          node[k].style.display = "none";
-        }
+    node = document.getElementsByClassName("category_list_group")[0].children;
+    for (let k = 0; k < node.length; k++) {
+      if (k >= elements) {
+        node[k].style.display = "none";
       }
     }
   }
 
   function nextList() {
-    let node = document.getElementsByClassName("category_list_group")[0]
-      .children;
-
     for (var i = index; i < index + 3; i++) {
-      if (screen.width <= 768) {
-        if (i + 6 >= node.length) {
-          break;
-        }
-        node[i].style.display = "none";
-        node[i + 6].style.display = "block";
-        node[i + 6].style.display = "flex";
-        node[i + 6].style.flexDirection = "column";
-      } else {
-        if (i + 10 >= node.length) {
-          break;
-        }
-        node[i].style.display = "none";
-        node[i + 10].style.display = "block";
-        node[i + 10].style.display = "flex";
-        node[i + 10].style.flexDirection = "column";
+      if (i + elements >= node.length) {
+        break;
       }
+      node[i].style.display = "none";
+      node[i + elements].style.display = "block";
+      node[i + elements].style.display = "flex";
+      node[i + elements].style.flexDirection = "column";
     }
     index = i;
-    console.log(index);
-    if (screen.width <= 768) {
-      if (index + 6 >= node.length) {
-        document.getElementById("btn-category-next").style.display = "none";
-      }
-    } else {
-      if (index + 10 >= node.length) {
-        document.getElementById("btn-category-next").style.display = "none";
-      }
+    if (index + elements >= node.length) {
+      document.getElementById("btn-category-next").style.display = "none";
     }
     document.getElementById("btn-category-prev").style.display = "block";
   }
 
   function prevList() {
-    let node = document.getElementsByClassName("category_list_group")[0]
-      .children;
     for (var i = index; i > index - 3; i--) {
       if (i - 1 < 0) {
         break;
       }
-      if (screen.width <= 768) {
-        node[i - 1].style.display = "block";
-        node[i - 1].style.display = "flex";
-        node[i - 1].style.flexDirection = "column";
-        node[i + 5].style.display = "none";
-      } else {
-        node[i - 1].style.display = "block";
-        node[i - 1].style.display = "flex";
-        node[i - 1].style.flexDirection = "column";
-        node[i + 9].style.display = "none";
-      }
+      node[i - 1].style.display = "block";
+      node[i - 1].style.display = "flex";
+      node[i - 1].style.flexDirection = "column";
+      node[i + elements - 1].style.display = "none";
     }
     index = i;
     if (index <= 0) {
@@ -231,8 +196,6 @@ var category = (function () {
     prevListCategory: prevList,
   };
 })();
-
-category.getCategories();
 
 var promotionCategory = (function () {
   let promotionCategories = [
@@ -277,7 +240,24 @@ var promotionCategory = (function () {
       image: "images/mt.png",
     },
   ];
-  let index = 0;
+  const widthDisplay = screen.width;
+  var index = 0;
+  var node;
+  var elements;
+  if (widthDisplay <= 375) {
+    elements = 2;
+  } else {
+    if (widthDisplay <= 425) {
+      elements = 4;
+    } else {
+      if (widthDisplay <= 768) {
+        elements = 6;
+      } else {
+        elements = 10;
+      }
+    }
+  }
+
   function getPromotionCategories() {
     let listcategory = "";
     for (let i = 0; i < promotionCategories.length; i++) {
@@ -291,31 +271,29 @@ var promotionCategory = (function () {
     document.getElementsByClassName(
       "promotion-categories"
     )[0].innerHTML = listcategory;
-    if (screen.width <= 768) {
-      let node = document.getElementsByClassName("promotion-categories")[0]
-        .children;
-      for (let j = 0; j < node.length; j++) {
-        if (j >= 6) {
-          node[j].style.display = "none";
-        }
+    node = document.getElementsByClassName("promotion-categories")[0].children;
+    for (let j = 0; j < node.length; j++) {
+      if (j >= elements) {
+        node[j].style.display = "none";
       }
     }
   }
 
   function nextList() {
-    let node = document.getElementsByClassName("promotion-categories")[0]
-      .children;
+    // if(widthDisplay <= 768){
+    //   next(6);
+    // }
     for (var i = index; i < index + 4; i++) {
-      if (i + 6 >= node.length) {
+      if (i + elements >= node.length) {
         break;
       }
       node[i].style.display = "none";
-      node[i + 6].style.display = "block";
-      node[i + 6].style.display = "flex";
-      node[i + 6].style.flexDirection = "column";
+      node[i + elements].style.display = "block";
+      node[i + elements].style.display = "flex";
+      node[i + elements].style.flexDirection = "column";
     }
     index = i;
-    if (index + 6 >= node.length) {
+    if (index + elements >= node.length) {
       document.getElementById("btn-promotion-category-next").style.display =
         "none";
     }
@@ -324,13 +302,11 @@ var promotionCategory = (function () {
   }
 
   function prevList() {
-    let node = document.getElementsByClassName("promotion-categories")[0]
-      .children;
     for (var i = index; i > index - 4; i--) {
       if (i - 1 < 0) {
         break;
       }
-      node[i + 5].style.display = "none";
+      node[i + elements - 1].style.display = "none";
       node[i - 1].style.display = "block";
       node[i - 1].style.display = "flex";
       node[i - 1].style.flexDirection = "column";
@@ -343,14 +319,13 @@ var promotionCategory = (function () {
     document.getElementById("btn-promotion-category-next").style.display =
       "block";
   }
+
   return {
     getPromotionCategories: getPromotionCategories,
     nextListCategory: nextList,
     prevListCategory: prevList,
   };
 })();
-
-promotionCategory.getPromotionCategories();
 
 var slideBanner = (function () {
   let imagesBanner = [
@@ -367,7 +342,7 @@ var slideBanner = (function () {
       image: "./images/banner3.jpeg",
     },
   ];
-  let index = 0;
+  var index = 0;
 
   function showSlide() {
     let listDot = "";
@@ -395,8 +370,6 @@ var slideBanner = (function () {
     callBanner: callBanner,
   };
 })();
-
-slideBanner.showSlideBanner();
 
 var slideBannerMall = (function () {
   let imagesBannerMall = [
@@ -448,14 +421,6 @@ var slideBannerMall = (function () {
   };
 })();
 
-slideBannerMall.showSlideBannerMall();
-
-setInterval(function () {
-  slideBanner.showSlideBanner();
-  slideBannerMall.showSlideBannerMall();
-
-}, 4000);
-
 var productSale = (function () {
   let productSales = [
     {
@@ -501,7 +466,16 @@ var productSale = (function () {
       quantitySold: "2",
     },
   ];
-  let index = 0;
+  var widthDisplay = screen.width;
+  var index = 0;
+  var node;
+  var elements;
+
+  if (widthDisplay <= 768) {
+    elements = 4;
+  } else {
+    elements = 6;
+  }
   function showListProductSale() {
     let listProduct = "";
     let width;
@@ -523,80 +497,50 @@ var productSale = (function () {
     document.getElementsByClassName(
       "flash_sale_items"
     )[0].innerHTML = listProduct;
-    let node = document.getElementsByClassName("flash_sale_items")[0].children;
-    if (screen.width <= 768) {
-      for (let k = 0; k < node.length; k++) {
-        if (k >= 5) {
-          node[k].style.display = "none";
-        }
-      }
-    } else {
-      for (let k = 0; k < node.length; k++) {
-        if (k >= 6) {
-          node[k].style.display = "none";
-        }
+    node = document.getElementsByClassName("flash_sale_items")[0].children;
+    for (let k = 0; k < node.length; k++) {
+      if (k >= elements) {
+        node[k].style.display = "none";
       }
     }
   }
+
   function nextList() {
-    let node = document.getElementsByClassName("flash_sale_items")[0].children;
     for (var i = index; i < index + 4; i++) {
-      if (screen.width <= 768) {
-        if (i + 5 >= node.length) {
-          break;
-        }
-        node[i].style.display = "none";
-        node[i + 5].style.display = "block";
-      } else {
-        if (i + 6 >= node.length) {
-          break;
-        }
-        node[i].style.display = "none";
-        node[i + 6].style.display = "block";
+      if (i + elements >= node.length) {
+        break;
       }
+      node[i].style.display = "none";
+      node[i + elements].style.display = "block";
     }
     index = i;
-    if (screen.width <= 768){
-      if (index + 5 >= node.length) {
-        document.getElementById('btn-sale-next').style.display = "none";
-      }
-    }else{
-      if (index + 6 >= node.length) {
-        document.getElementById('btn-sale-next').style.display = "none";
-      }
+    if (index + elements >= node.length) {
+      document.getElementById("btn-sale-next").style.display = "none";
     }
-    
-    document.getElementById('btn-sale-prev').style.display = "block";
+    document.getElementById("btn-sale-prev").style.display = "block";
   }
 
   function prevList() {
-    let node = document.getElementsByClassName("flash_sale_items")[0].children;
     for (var i = index; i > index - 4; i--) {
       if (i - 1 < 0) {
         break;
       }
-      if(screen.width <= 768){
-        node[i + 4].style.display = "none";
-        node[i - 1].style.display = "block";
-      }else{
-        node[i + 5].style.display = "none";
-        node[i - 1].style.display = "block";
-      }
+      node[i + elements - 1].style.display = "none";
+      node[i - 1].style.display = "block";
     }
     index = i;
     if (index <= 0) {
-      document.getElementById('btn-sale-prev').style.display = "none";
+      document.getElementById("btn-sale-prev").style.display = "none";
     }
-    document.getElementById('btn-sale-next').style.display = "block";
+    document.getElementById("btn-sale-next").style.display = "block";
   }
+
   return {
     showListProductSale: showListProductSale,
     nextListProductSale: nextList,
     prevListProductSale: prevList,
   };
 })();
-
-productSale.showListProductSale();
 
 var productMallSale = (function () {
   let productMallSales = [
@@ -633,9 +577,15 @@ var productMallSale = (function () {
       image: "./images/wipro.jpeg",
     },
   ];
-  const widthDisplay = 768;
-  let index = 0;
-
+  var widthDisplay = screen.width;
+  var index = 0;
+  var node;
+  var elements;
+  if (widthDisplay <= 768) {
+    elements = 3;
+  } else {
+    elements = 4;
+  }
   function showProduct() {
     let listProduct = "";
     for (let i = 0; i < 2; i++) {
@@ -677,76 +627,40 @@ var productMallSale = (function () {
     document.getElementsByClassName(
       "products_mall_list"
     )[0].innerHTML = listProduct;
-    let node = document.getElementsByClassName("products_mall_list")[0]
-      .children;
-    if (screen.width <= widthDisplay){
-      for (let k = 0; k < node.length; k++) {
-        if (k >= 3) {
-          node[k].style.display = "none";
-        }
+    node = document.getElementsByClassName("products_mall_list")[0].children;
+    for (let k = 0; k < node.length; k++) {
+      if (k >= elements) {
+        node[k].style.display = "none";
       }
-    }else {
-      for (let k = 0; k < node.length; k++) {
-        if (k >= 4) {
-          node[k].style.display = "none";
-        }
-      }
-    }    
+    }
   }
 
   function nextProduct() {
-    let node = document.getElementsByClassName("products_mall_list")[0]
-      .children;
     for (var i = index; i < index + 3; i++) {
-      if (screen.width <= widthDisplay) {
-        if (i + 3 >= node.length) {
-          break;
-        }
-        node[i].style.display = "none";
-        node[i + 3].style.display = "block";
-        node[i + 3].style.display = "flex";
-        node[i + 3].style.flexDirection = "column";
-      }else{
-        if (i + 4 >= node.length) {
-          break;
-        }
-        node[i].style.display = "none";
-        node[i + 4].style.display = "block";
-        node[i + 4].style.display = "flex";
-        node[i + 4].style.flexDirection = "column";
-      }      
+      if (i + elements >= node.length) {
+        break;
+      }
+      node[i].style.display = "none";
+      node[i + elements].style.display = "block";
+      node[i + elements].style.display = "flex";
+      node[i + elements].style.flexDirection = "column";
     }
     index = i;
-    if(screen.width <= widthDisplay){
-      if (index + 3 >= node.length) {
-        document.getElementById("btn-mall-next").style.display = "none";
-      }
-    }else{
-      if (index + 4 >= node.length) {
-        document.getElementById("btn-mall-next").style.display = "none";
-      }
-    }    
+    if (index + elements >= node.length) {
+      document.getElementById("btn-mall-next").style.display = "none";
+    }
     document.getElementById("btn-mall-prev").style.display = "block";
   }
 
   function prevProduct() {
-    let node = document.getElementsByClassName("products_mall_list")[0]
-      .children;
     for (var i = index; i > index - 3; i--) {
       if (i - 1 < 0) {
         break;
       }
-      if (screen.width <= widthDisplay){
-        node[i + 2].style.display = "none";
+      node[i + elements - 1].style.display = "none";
       node[i - 1].style.display = "block";
       node[i - 1].style.display = "flex";
       node[i - 1].style.flexDirection = "column";
-      }else{
-        node[i + 3].style.display = "none";
-        node[i - 1].style.display = "block";
-        node[i - 1].style.display = "flex";
-        node[i - 1].style.flexDirection = "column";
-      }      
     }
     index = i;
     if (index <= 0) {
@@ -761,8 +675,6 @@ var productMallSale = (function () {
     prevProductMallSale: prevProduct,
   };
 })();
-
-productMallSale.showProductMallSale();
 
 var topSearch = (function () {
   let topProducts = [
@@ -797,7 +709,7 @@ var topSearch = (function () {
       quantitySold: "4",
     },
   ];
-  let index = 0;
+  var index = 0;
   function showProduct() {
     let listProduct = "";
     for (let i = 0; i < topProducts.length; i += 3) {
@@ -881,8 +793,6 @@ var topSearch = (function () {
     prevProductTopSearch: prevProduct,
   };
 })();
-
-topSearch.showProductTopSearch();
 
 var product = (function () {
   let products = [
@@ -1056,34 +966,53 @@ var product = (function () {
   };
 })();
 
-product.getProductsToday(2);
-
-var scrollPage = (function(){
-  function checkScroll(){
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-      
+var scrollPage = (function () {
+  function checkScroll() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
       document.getElementById("btn-back-to-top").style.display = "block";
-  } else {
-       
+    } else {
       document.getElementById("btn-back-to-top").style.display = "none";
+    }
   }
-  }
-  function scroll(){
-    setTimeout(function(){
+  function scroll() {
+    setTimeout(function () {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
     }, 500);
-      
-    
   }
 
   return {
-    checkScroll:checkScroll,
-    scroll : scroll
-  }
+    checkScroll: checkScroll,
+    scroll: scroll,
+  };
 })();
 
-window.onscroll = function() {
-  console.log('a');
-  scrollPage.checkScroll();
+window.onload = function () {
+  slideBanner.showSlideBanner();
+
+  slideBannerMall.showSlideBannerMall();
+
+  promotionCategory.getPromotionCategories();
+
+  category.getCategories();
+
+  productSale.showListProductSale();
+
+  productMallSale.showProductMallSale();
+
+  topSearch.showProductTopSearch();
+
+  product.getProductsToday(2);
+
+  setInterval(function () {
+    slideBanner.showSlideBanner();
+    slideBannerMall.showSlideBannerMall();
+  }, 4000);
+
+  window.onscroll = function () {
+    scrollPage.checkScroll();
+  };
 };

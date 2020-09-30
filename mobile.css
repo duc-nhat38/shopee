@@ -10,6 +10,12 @@
   .container .content {
     padding: 11.5% 0 0;
   }
+  #btn-back-to-top {
+    padding: 0.65% 1.4%;
+  }
+  #btn-back-to-top:hover {
+    padding: 0.8% 1.55%;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -112,7 +118,7 @@
     width: 16.66667%;
   }
   .flash_sale .flash_sale_items a {
-    width: 20%;
+    width: 25%;
   }
   /* .products_mall .products_mall_list a {
     font-size: 0.8rem;
@@ -139,5 +145,7 @@
 }
 
 @media screen and (max-width: 425px) {
-
+  .banner_promotion-categories .list-promotion-categories .promotion-categories a {
+    width: 25%;
+  }
 }
