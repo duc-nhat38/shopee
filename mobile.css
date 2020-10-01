@@ -205,7 +205,7 @@
   .container .content {
     padding: 19% 0 0;
   }
-  .container .header{
+  .container .header {
     padding: 1% 5%;
   }
 
@@ -221,7 +221,7 @@
     justify-content: space-between;
     margin-bottom: 1%;
   }
-  
+
   .container .header .header_top {
     display: none;
   }
@@ -258,7 +258,7 @@
   .search form input:hover {
     font-size: 1rem;
   }
-  .header_mobile  .cart:hover i {
+  .header_mobile .cart:hover i {
     font-size: 1.05rem;
   }
   .banner .banner_static #banner_static_top {
@@ -294,17 +294,23 @@
   .list_products .list_products_header a {
     width: 50%;
   }
+  .carousel__header {
+    flex-direction: column;
+  }
   .carousel__header .carousel {
+    width: 100%;
     flex-wrap: wrap;
   }
 
   .carousel__header .carousel a {
     width: 50%;
     padding: 1% 2%;
-    text-align: center;
+    text-align: left;
     margin-left: 0%;
   }
   .carousel__header .carousel_all {
+    padding: 4% 0;
+    width: 100%;
     text-align: left;
   }
   .category_trend .btn-next {
@@ -324,15 +330,22 @@
     left: -4%;
     display: none;
   }
-  .list-promotion-categories:hover .btn-next , .list-promotion-categories .btn-next:hover {
+  .list-promotion-categories:hover .btn-next,
+  .list-promotion-categories .btn-next:hover {
     top: 35%;
     right: -4%;
+  }
+  .list-promotion-categories:hover .btn-prev,
+  .list-promotion-categories .btn-prev:hover {
+    top: 35%;
+    left: -5%;
+    padding: 5px 11px;
   }
   .category_list .btn-prev {
     top: 52%;
     left: -2.5%;
   }
-  .category_list .btn-next {    
+  .category_list .btn-next {
     right: -4%;
   }
   .content_padding .category_list:hover .btn-next,
@@ -367,13 +380,15 @@
     right: -4.7%;
     top: 30%;
   }
-  .category_trend .btn-next:hover , .category_trend:hover .btn-next {
+  .category_trend .btn-next:hover,
+  .category_trend:hover .btn-next {
     top: 29%;
     right: -5%;
     padding: 5px 10px;
     font-size: 1rem;
   }
-  .category_trend .btn-prev:hover , .category_trend:hover .btn-prev {
+  .category_trend .btn-prev:hover,
+  .category_trend:hover .btn-prev {
     top: 29%;
     left: -5%;
     padding: 5px 10px;
@@ -382,5 +397,82 @@
   .category_trend .btn-prev {
     left: -4.7%;
     top: 30%;
+  }
+  .product_mall_container:hover .btn-next,
+  .product_mall_container .btn-next:hover {
+   padding: 5px 10px;
+   font-size: 1rem;
+   top: 48%;
+   right: -4.5%;
+ }
+ .product_mall_container:hover .btn-prev,
+ .product_mall_container .btn-prev:hover {
+   top: 48%;
+   left: -4.5%;
+  padding: 5px 10px;
+  font-size: 1rem;
+ }
+ .product_mall_container .btn-prev {
+  top: 49%;
+  left: -4%;
+}
+.product_mall_container .btn-next {
+  top: 49%;
+  right: -4%;
+}
+}
+@media screen and (max-width: 375px) {
+  .container .content {
+    padding: 20% 0 0;
+  }
+  .banner_promotion-categories
+    .list-promotion-categories
+    .promotion-categories
+    a {
+    width: 50%;
+  }
+  .category_list .category_list_group .category_items {
+    width: 50%;
+  }
+  .flash_sale .flash_sale_items a {
+    width: 60%;
+    margin: auto;
+  }
+  .products_mall .products_mall_list div {
+    width: 100%;
+    flex-direction: row;
+  }
+  .category_section .category_trend .category_section_items a {
+    width: 100%;
+  }
+  .category_section .category_trend .category_section_items a .category_section_items_text {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    text-align: center;
+    padding-top: 10%;
+  }
+  .top_search .top_search_items a {
+    width: 60%;
+    margin: auto;
+  } 
+  #btn-back-to-top {
+    padding: 0.4%  2%;
+  }
+  #btn-back-to-top:hover {
+    padding: 0.5% 2.1%;
+  }
+}
+@media screen and (max-width: 375px) {
+  .container .content {
+    padding: 22% 0 0;
+  }
+  #btn-back-to-top {
+    font-size: 1rem;
+    padding: 0.5%  2%;
+  }
+  #btn-back-to-top:hover {
+    font-size: 1.1rem;
+    padding: 0.6% 2.5%;
   }
 }

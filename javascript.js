@@ -606,7 +606,7 @@ var productMallSale = (function () {
       }
     }
   }
-  
+
   function showProduct() {
     let listProduct = "";
     for (let i = 0; i < 2; i++) {
@@ -664,7 +664,11 @@ var productMallSale = (function () {
       node[i].style.display = "none";
       node[i + elements].style.display = "block";
       node[i + elements].style.display = "flex";
-      node[i + elements].style.flexDirection = "column";
+      if (elements > 1) {
+        node[i + elements].style.flexDirection = "column";
+      } else {
+        node[i + elements].style.flexDirection = "row";
+      }
     }
     index = i;
     if (index + elements >= node.length) {
@@ -740,7 +744,7 @@ var topSearch = (function () {
     if (widthDisplay <= 425) {
       elements = 2;
     } else {
-        elements = 3;
+      elements = 3;
     }
   }
   function showProduct() {
@@ -788,7 +792,7 @@ var topSearch = (function () {
   }
 
   function nextProduct() {
-    for (var i = index; i < index + 3; i++) {
+    for (var i = index; i < index + 2; i++) {
       if (i + elements >= node.length) {
         break;
       }
@@ -803,7 +807,7 @@ var topSearch = (function () {
   }
 
   function prevProduct() {
-    for (var i = index; i > index - 3; i--) {
+    for (var i = index; i > index - 2; i--) {
       if (i - 1 < 0) {
         break;
       }
@@ -914,11 +918,14 @@ var product = (function () {
       quantitySold: "350",
     },
   ];
-
+  const widthDisplay = screen.width;
   function getProductstoday(times) {
     let listProductToday = "";
-
+    if (widthDisplay <= 425){
+        times = 1;
+    }
     for (let i = 0; i < times; i++) {
+      
       for (let j = 0; j < products.length; j++) {
         listProductToday += `
         <div class="product">
@@ -952,7 +959,9 @@ var product = (function () {
 
   function getProductsMallSale(times) {
     let listProductMallSale = "";
-
+    if (widthDisplay <= 425){
+      times = 1;
+  }
     for (let i = 0; i < times; i++) {
       for (let j = products.length - 1; j >= 0; j--) {
         listProductMallSale += `
@@ -1024,48 +1033,52 @@ var scrollPage = (function () {
   };
 })();
 
-var trendSearch = (function(){
+var trendSearch = (function () {
   var categories = [
     {
-      'name' : 'sandal nữ',
-      'image' : './images/sandal-female.jpeg',
-      'quantity' : '307'
+      name: "sandal nữ",
+      image: "./images/sandal-female.jpeg",
+      quantity: "307",
     },
     {
-      'name' : 'balo nữ',
-      'image' : './images/balo-female.jpeg',
-      'quantity' : '257'
+      name: "balo nữ",
+      image: "./images/balo-female.jpeg",
+      quantity: "257",
     },
     {
-      'name' : 'balo nam',
-      'image' : './images/balo-male.jpeg',
-      'quantity' : '310'
+      name: "balo nam",
+      image: "./images/balo-male.jpeg",
+      quantity: "310",
     },
     {
-      'name' : 'dép nam',
-      'image' : './images/sandal-male.jpeg',
-      'quantity' : '250'
+      name: "dép nam",
+      image: "./images/sandal-male.jpeg",
+      quantity: "250",
     },
     {
-      'name' : 'áo nữ',
-      'image' : './images/clothes-female.jpeg',
-      'quantity' : '307'
-    }
+      name: "áo nữ",
+      image: "./images/clothes-female.jpeg",
+      quantity: "307",
+    },
   ];
   var node;
   const widthDisplay = screen.width;
   var elements;
   var index = 0;
-  if (widthDisplay <= 425) {
-    elements = 2;
-  }else{
-    elements = 5;
+  if (widthDisplay <= 375) {
+    elements = 1;
+  } else {
+    if (widthDisplay <= 425) {
+      elements = 2;
+    } else {
+      elements = 5;
+    }
   }
-  function getCategory(){
-    let listCategory = '';
+
+  function getCategory() {
+    let listCategory = "";
     for (let i = 0; i < categories.length; i++) {
-      listCategory += 
-      `
+      listCategory += `
       <a href="#">
               <div class="category_section_items_text">
                 <span>${categories[i].name}</span>
@@ -1073,15 +1086,17 @@ var trendSearch = (function(){
               </div>
               <img src="${categories[i].image}" alt="" />
             </a>
-      `; 
-      
+      `;
     }
-    document.getElementsByClassName('category_section_items')[0].innerHTML = listCategory;
-    node = document.getElementsByClassName('category_section_items')[0].children;
+    document.getElementsByClassName(
+      "category_section_items"
+    )[0].innerHTML = listCategory;
+    node = document.getElementsByClassName("category_section_items")[0]
+      .children;
     for (let j = 0; j < node.length; j++) {
-      if (j >= elements){
-        node[j].style.display = 'none';
-      }      
+      if (j >= elements) {
+        node[j].style.display = "none";
+      }
     }
   }
 
@@ -1118,29 +1133,29 @@ var trendSearch = (function(){
   }
 
   return {
-    getCategory:getCategory,
-    nextCategory : nextCategory,
-    prevCategory  : prevCategory
-  }
+    getCategory: getCategory,
+    nextCategory: nextCategory,
+    prevCategory: prevCategory,
+  };
 })();
 
-
-var events = (function(){
+var events = (function () {
   var index = 0;
-  function showMenu(){
-    if(index == 0){
-      document.getElementsByClassName('list_menu')[0].style.display = 'block';
-      document.getElementsByClassName('list_menu')[0].style.display = 'flex';
-      document.getElementsByClassName('list_menu')[0].style.flexDirection = 'column';
-    }else{
-      document.getElementsByClassName('list_menu')[0].style.display = 'none';
-    }   
-    (index == 0)?index = 1: index = 0;
-}
+  function showMenu() {
+    if (index == 0) {
+      document.getElementsByClassName("list_menu")[0].style.display = "block";
+      document.getElementsByClassName("list_menu")[0].style.display = "flex";
+      document.getElementsByClassName("list_menu")[0].style.flexDirection =
+        "column";
+    } else {
+      document.getElementsByClassName("list_menu")[0].style.display = "none";
+    }
+    index == 0 ? (index = 1) : (index = 0);
+  }
 
-return {
-  showListMenu : showMenu
-}
+  return {
+    showListMenu: showMenu,
+  };
 })();
 
 window.onload = function () {
@@ -1170,6 +1185,4 @@ window.onload = function () {
   window.onscroll = function () {
     scrollPage.checkScroll();
   };
-
-
 };
